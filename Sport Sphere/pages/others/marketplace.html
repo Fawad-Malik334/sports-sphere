@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marketplace | Sport Sphere</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      color: #333;
+      line-height: 1.6;
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                  url('https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+      min-height: 100vh;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header styles - matching previous pages */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      background-color: rgba(255, 255, 255, 0.95);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-img {
+      height: 40px;
+      width: auto;
+    }
+
+    .logo-text {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #2c3e50;
+      font-style: italic;
+    }
+
+    .logo-tagline {
+      font-size: 0.8rem;
+      color: #7f8c8d;
+      margin-top: 3px;
+    }
+
+    nav {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    nav a {
+      font-weight: 600;
+      color: #2c3e50;
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    nav a:hover, nav a.active {
+      color: #e74c3c;
+    }
+
+    .notification-badge {
+      background-color: #e74c3c;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 5px;
+    }
+
+    .profile-btn {
+      background-color: #e74c3c;
+      color: white !important;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s;
+    }
+
+    .profile-btn:hover {
+      background-color: #c0392b;
+    }
+
+    /* Marketplace page styles */
+    .marketplace-container {
+      padding: 140px 5% 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .marketplace-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .marketplace-header h2 {
+      font-size: 2.2rem;
+      color: white;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    .marketplace-header p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .search-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      align-items: center;
+    }
+
+    .search-container {
+      flex: 1;
+      min-width: 250px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.8rem 1rem 0.8rem 3rem;
+      border: 2px solid #e1e5eb;
+      border-radius: 5px;
+      font-size: 1rem;
+      background-color: rgba(255, 255, 255, 0.95);
+      transition: all 0.3s;
+    }
+
+    .search-input:focus {
+      border-color: #e74c3c;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #7f8c8d;
+    }
+
+    .filter-btn {
+      padding: 0.6rem 1.2rem;
+      background-color: rgba(255, 255, 255, 0.95);
+      border: 2px solid #e1e5eb;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background-color: #e74c3c;
+      color: white;
+      border-color: #e74c3c;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .product-card {
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+      border-left: 4px solid #e74c3c;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .product-image {
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .product-info {
+      padding: 1.5rem;
+    }
+
+    .product-title {
+      font-size: 1.3rem;
+      color: #2c3e50;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-vendor {
+      color: #7f8c8d;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .product-price {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #e74c3c;
+      margin-bottom: 1.5rem;
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      background-color: #e74c3c;
+      color: white;
+      border-radius: 5px;
+      font-weight: 600;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .btn:hover {
+      background-color: #c0392b;
+      transform: translateY(-2px);
+    }
+
+    .btn.secondary {
+      background-color: transparent;
+      border: 2px solid #e74c3c;
+      color: #e74c3c;
+    }
+
+    .btn.secondary:hover {
+      background-color: #e74c3c;
+      color: white;
+    }
+
+    /* Footer styles */
+    footer {
+      background-color: rgba(44, 62, 80, 0.9);
+      color: white;
+      padding: 2rem 5%;
+      margin-top: 3rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .copyright {
+      font-size: 0.9rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem 5%;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      nav {
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+
+      .marketplace-container {
+        padding-top: 160px;
+      }
+
+      .marketplace-header h2 {
+        font-size: 1.8rem;
+      }
+
+      .product-actions {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-content {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="../index.html" class="logo">
+      <img src="../../assests/images/Logo.png" alt="Sport Sphere Logo" class="logo-img">
+      <div>
+        <div class="logo-text">Sports Sphere</div>
+      </div>
+    </a>
+    <nav>
+      <a href="../vendor/vendor.html"><i class="fas fa-home"></i> <span>Vendors</span></a>
+      <a href="report.html"><i class="fas fa-shopping-cart"></i> <span>Cart</span> <span class="notification-badge">2</span></a>
+      <a href="../vendor/vendor-profile.html" class="profile-btn"><i class="fas fa-user"></i></a>
+    </nav>
+  </header>
+
+  <main class="marketplace-container">
+    <div class="marketplace-header">
+      <h2><i class="fas fa-store"></i> Gear Up for Success</h2>
+      <p>Premium sports equipment and training gear from trusted vendors</p>
+    </div>
+    
+    <div class="search-filters">
+      <div class="search-container">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" class="search-input" placeholder="Search products...">
+      </div>
+      
+      <button class="filter-btn active"><i class="fas fa-filter"></i> All</button>
+      <button class="filter-btn"><i class="fas fa-dumbbell"></i> Training</button>
+      <button class="filter-btn"><i class="fas fa-tshirt"></i> Apparel</button>
+      <button class="filter-btn"><i class="fas fa-running"></i> Running</button>
+    </div>
+    
+    <div class="products-grid">
+      <!-- Original Products with new unique images -->
+      <div class="product-card">
+        <div class="product-image" style="background-image: url('https://m.media-amazon.com/images/I/71C9UIJLGOL._AC_UF1000,1000_QL80_.jpg')"></div>
+        <div class="product-info">
+          <h3 class="product-title">Professional Resistance Bands Set</h3>
+          <div class="product-vendor">By Fitness Pro</div>
+          <div class="product-price">PKR 2,500</div>
+          <div class="product-actions">
+            <a href="report.html" class="btn"><i class="fas fa-eye"></i> View</a>
+            <a href="#" class="btn secondary"><i class="fas fa-cart-plus"></i> Add to Cart</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="product-image" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrTrZ9RHduW-gO3uOy7fpkEPMMTCs3eXwauQ&s')"></div>
+        <div class="product-info">
+          <h3 class="product-title">High-Performance Training Ball</h3>
+          <div class="product-vendor">By Sports Gear Co.</div>
+          <div class="product-price">PKR 5,000</div>
+          <div class="product-actions">
+            <a href="report.html" class="btn"><i class="fas fa-eye"></i> View</a>
+            <a href="#" class="btn secondary"><i class="fas fa-cart-plus"></i> Add to Cart</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="product-image" style="background-image: url('https://www.pro-tecathletics.com/wp-content/uploads/2022/04/Premium-Jump-Rope-product-only.jpg')"></div>
+        <div class="product-info">
+          <h3 class="product-title">Premium Jump Rope</h3>
+          <div class="product-vendor">By Jump Masters</div>
+          <div class="product-price">PKR 1,800</div>
+          <div class="product-actions">
+            <a href="report.html" class="btn"><i class="fas fa-eye"></i> View</a>
+            <a href="#" class="btn secondary"><i class="fas fa-cart-plus"></i> Add to Cart</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1461896836934-ffe607ba8211?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80)"></div>
+        <div class="product-info">
+          <h3 class="product-title">Elite Running Shoes</h3>
+          <div class="product-vendor">By RunFast</div>
+          <div class="product-price">PKR 15,000</div>
+          <div class="product-actions">
+            <a href="report.html" class="btn"><i class="fas fa-eye"></i> View</a>
+            <a href="#" class="btn secondary"><i class="fas fa-cart-plus"></i> Add to Cart</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional Products with unique images -->
+      <div class="product-card">
+        <div class="product-image" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPs2RJLgl_68_24fex89OEonj8GlbhuJ8Ysw&s')"></div>
+        <div class="product-info">
+          <h3 class="product-title">Weighted Training Vest (10kg)</h3>
+          <div class="product-vendor">By PowerFit</div>
+          <div class="product-price">PKR 8,500</div>
+          <div class="product-actions">
+            <a href="report.html" class="btn"><i class="fas fa-eye"></i> View</a>
+            <a href="#" class="btn secondary"><i class="fas fa-cart-plus"></i> Add to Cart</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0PjhaDrGJpEPKtQoCCSt9f7G4wcXtc_bCCg&s')"></div>
+        <div class="product-info">
+          <h3 class="product-title">Professional Boxing Gloves</h3>
+          <div class="product-vendor">By Knockout Gear</div>
+          <div class="product-price">PKR 6,200</div>
+          <div class="product-actions">
+            <a href="report.html" class="btn"><i class="fas fa-eye"></i> View</a>
+            <a href="#" class="btn secondary"><i class="fas fa-cart-plus"></i> Add to Cart</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image" style="background-image: url('data:image/jpeg;base64,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')"></div>
+        <div class="product-info">
+          <h3 class="product-title">Yoga Mat (Premium)</h3>
+          <div class="product-vendor">By ZenYoga</div>
+          <div class="product-price">PKR 3,500</div>
+          <div class="product-actions">
+            <a href="report.html" class="btn"><i class="fas fa-eye"></i> View</a>
+            <a href="#" class="btn secondary"><i class="fas fa-cart-plus"></i> Add to Cart</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1461896836934-ffe607ba8211?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"></div>
+        <div class="product-info">
+          <h3 class="product-title">Football Cleats (Pro Edition)</h3>
+          <div class="product-vendor">By SoccerPro</div>
+          <div class="product-price">PKR 12,000</div>
+          <div class="product-actions">
+            <a href="report.html" class="btn"><i class="fas fa-eye"></i> View</a>
+            <a href="#" class="btn secondary"><i class="fas fa-cart-plus"></i> Add to Cart</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image" style="background-image: url('data:image/jpeg;base64,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')"></div>
+        <div class="product-info">
+          <h3 class="product-title">Adjustable Dumbbell Set (20kg)</h3>
+          <div class="product-vendor">By IronStrength</div>
+          <div class="product-price">PKR 25,000</div>
+          <div class="product-actions">
+            <a href="report.html" class="btn"><i class="fas fa-eye"></i> View</a>
+            <a href="#" class="btn secondary"><i class="fas fa-cart-plus"></i> Add to Cart</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image" style="background-image: url('https://dqh479dn9vg99.cloudfront.net/wp-content/uploads/sites/9/2018/12/best-aero-helmets-group-shot-350x233.jpg')"></div>
+        <div class="product-info">
+          <h3 class="product-title">Cycling Helmet (Aero Design)</h3>
+          <div class="product-vendor">By SpeedCycle</div>
+          <div class="product-price">PKR 7,800</div>
+          <div class="product-actions">
+            <a href="report.html" class="btn"><i class="fas fa-eye"></i> View</a>
+            <a href="#" class="btn secondary"><i class="fas fa-cart-plus"></i> Add to Cart</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo">
+        <i class="fas fa-running"></i> Sport Sphere
+      </div>
+      <div class="copyright">
+        &copy; 2025 Sport Sphere. All rights reserved.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

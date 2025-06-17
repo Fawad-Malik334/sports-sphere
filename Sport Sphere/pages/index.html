@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sport Sphere – Features & Functionalities.</title>
+  <link rel="stylesheet" href="../css/index.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+  <a href="index.html" class="logo">
+    <img src="../assests/images/Logo.png" alt="Sport Sphere Logo" class="logo-img">
+    <div class="logo-text">Sport Sphere</div>
+  </a>
+  <nav>
+    <a href="login.html">Login</a>
+    <a href="register.html">Sign Up</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h2>Train Smarter. Play Harder.</h2>
+  <p>Connect with professional coaches, track your progress, and explore verified sports gear.</p>
+  <div class="cta-buttons">
+    <a href="login.html?role=athlete" class="btn primary">Join as Athlete</a>
+        <a href="login.html?role=coach" class="btn secondary">Become a Coach</a>
+        <a href="login.html?role=vendor" class="btn tertiary">Join as Vendor</a>
+        <a href="login.html?role=admin" class="btn secondary">Join as Admin</a>
+  </div>
+</section>
+
+<section class="info-section" id="about">
+  <h3>Why Choose Sport Sphere?</h3>
+  <ul>
+    <li>Personalized coaching sessions with certified professionals</li>
+    <li>Real-time progress tracking with advanced analytics</li>
+    <li>Secure payment processing and encrypted messaging</li>
+    <li>Authentic sports gear marketplace with verified vendors</li>
+    <li>Comprehensive athlete development programs</li>
+    <li>Flexible scheduling and session management</li>
+  </ul>
+</section>
+
+<footer>
+  <p>&copy; 2025 Sport Sphere | All rights reserved</p>
+</footer>
+
+
+<script>
+  // This script can be used to handle the registration type parameter
+  document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.querySelectorAll('.btn[href*="register.html"]');
+    
+    buttons.forEach(button => {
+      button.addEventListener('click', function(e) {
+        // Store the registration type in localStorage
+        const type = this.getAttribute('href').split('=')[1];
+        localStorage.setItem('registrationType', type);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

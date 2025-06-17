@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Athlete Dashboard | Sport Sphere</title>
+  <link rel="stylesheet" href="../../css/athlete.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+ <header>
+    <a href="../index.html" class="logo">
+      <img src="../../assests/images/Logo.png" alt="Sport Sphere Logo" class="logo-img">
+      <div>
+        <div class="logo-text">Sports Sphere</div>
+      </div>
+    </a>
+    <nav>
+      <a href="athlete.html" class="active"><i class="fas fa-home"></i> <span>Home</span></a>
+      <a href="message.html"><i class="fas fa-envelope"></i> <span>Messages</span></a>
+      <a href="progress.html"><i class="fas fa-chart-line"></i> <span>Progress</span></a>
+      <a href="find-coaches.html"><i class="fas fa-search"></i> <span>Find Coaches</span></a>
+      <a href="athelte-profile.html" class="profile-btn"><i class="fas fa-user"></i></a>
+    </nav>
+  </header>
+
+  <main class="dashboard">
+    <div class="welcome-banner">
+      <div class="welcome-text">
+        <h2>Welcome Back, <span class="athlete-name">User!</span>!</h2>
+        <p>Ready for your next training session? You have 5 upcoming bookings.</p>
+      </div>
+      <div class="notification-bell">
+        <i class="fas fa-bell"></i>
+      </div>
+    </div>
+
+    <section class="card-container">
+      <div class="dashboard-card booking-card">
+        <div class="card-icon">
+          <i class="fas fa-calendar-check"></i>
+        </div>
+        <h3>My Bookings</h3>
+        <p>Manage your upcoming sessions and event registrations</p>
+        <a href="booking.html" class="btn">View Schedule</a>
+      </div>
+
+      <div class="dashboard-card progress-card">
+        <div class="card-icon">
+          <i class="fas fa-chart-bar"></i>
+        </div>
+        <h3>Progress Tracker</h3>
+        <p>Analyze your performance metrics and improvements</p>
+        <a href="athlete-progress.html" class="btn secondary">View Analytics</a>
+      </div>
+
+      <div class="dashboard-card coach-card">
+        <div class="card-icon">
+          <i class="fas fa-user-tie"></i>
+        </div>
+        <h3>Find a Coach</h3>
+        <p>Connect with certified coaches in your sport</p>
+        <a href="find-coaches.html" class="btn">Browse Coaches</a>
+      </div>
+
+      
+    </section>
+
+    <section class="quick-stats">
+      <h3><i class="fas fa-tachometer-alt"></i> Quick Stats</h3>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value">12</div>
+          <div class="stat-label">Completed Sessions</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">4.8</div>
+          <div class="stat-label">Average Rating</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">85%</div>
+          <div class="stat-label">Goal Progress</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo">
+        <i class="fas fa-running"></i> Sport Sphere
+      </div>
+      <div class="footer-links">
+        <a href="athlete.html">About Us</a>
+        <a href="athelte-profile.html">Contact</a>
+        <a href="#">Privacy Policy</a>
+        <a href="athlete.html">Terms of Service</a>
+      </div>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+    <div class="copyright">
+      &copy; 2025 Sport Sphere. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="../../js/athlete.js"></script>
+</body>
+</html>

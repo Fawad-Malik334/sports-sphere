@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find Coaches | Sport Sphere</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      color: #333;
+      line-height: 1.6;
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                  url('https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+      min-height: 100vh;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header styles - matching previous pages */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      background-color: rgba(255, 255, 255, 0.95);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-img {
+      height: 40px;
+      width: auto;
+    }
+
+    .logo-text {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #2c3e50;
+      font-style: italic;
+    }
+
+    .logo-tagline {
+      font-size: 0.8rem;
+      color: #7f8c8d;
+      margin-top: 3px;
+    }
+
+    nav {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    nav a {
+      font-weight: 600;
+      color: #2c3e50;
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    nav a:hover, nav a.active {
+      color: #e74c3c;
+    }
+
+    .notification-badge {
+      background-color: #e74c3c;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 5px;
+    }
+
+    .profile-btn {
+      background-color: #e74c3c;
+      color: white !important;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s;
+    }
+
+    .profile-btn:hover {
+      background-color: #c0392b;
+    }
+
+    /* Find Coaches page styles */
+    .coaches-container {
+      padding: 140px 5% 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .coaches-heading {
+      font-size: 2.2rem;
+      color: white;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    .search-container {
+      position: relative;
+      margin-bottom: 2rem;
+      max-width: 800px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.8rem 1rem 0.8rem 3rem;
+      border: 2px solid #e1e5eb;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: all 0.3s;
+      background-color: rgba(255, 255, 255, 0.95);
+    }
+
+    .search-input:focus {
+      border-color: #e74c3c;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #7f8c8d;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-bottom: 2rem;
+    }
+
+    .filter-btn {
+      padding: 0.5rem 1.2rem;
+      background-color: rgba(255, 255, 255, 0.95);
+      border: 2px solid #e1e5eb;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background-color: #e74c3c;
+      color: white;
+      border-color: #e74c3c;
+    }
+
+    .coaches-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .coach-card {
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+      border-left: 4px solid #e74c3c;
+    }
+
+    .coach-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .coach-image {
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .coach-info {
+      padding: 1.5rem;
+    }
+
+    .coach-info h3 {
+      font-size: 1.5rem;
+      color: #2c3e50;
+      margin-bottom: 0.5rem;
+    }
+
+    .coach-specialty {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #7f8c8d;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .coach-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .coach-rating .stars {
+      color: #e74c3c;
+    }
+
+    .coach-rating .review-count {
+      color: #7f8c8d;
+      font-size: 0.9rem;
+    }
+
+    .coach-bio {
+      color: #7f8c8d;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .coach-actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      background-color: #e74c3c;
+      color: white;
+      border-radius: 5px;
+      font-weight: 600;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .btn:hover {
+      background-color: #c0392b;
+      transform: translateY(-2px);
+    }
+
+    .btn.secondary {
+      background-color: transparent;
+      border: 2px solid #e74c3c;
+      color: #e74c3c;
+    }
+
+    .btn.secondary:hover {
+      background-color: #e74c3c;
+      color: white;
+    }
+
+    /* Footer styles */
+    footer {
+      background-color: rgba(44, 62, 80, 0.9);
+      color: white;
+      padding: 2rem 5%;
+      margin-top: 3rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .copyright {
+      font-size: 0.9rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      .coaches-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem 5%;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      nav {
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+
+      .coaches-container {
+        padding-top: 160px;
+      }
+
+      .coaches-heading {
+        font-size: 1.8rem;
+      }
+
+      .coach-actions {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .coaches-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-content {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="../index.html" class="logo">
+      <img src="../../assests/images/Logo.png" alt="Sport Sphere Logo" class="logo-img">
+      <div>
+        <div class="logo-text">Sports Sphere</div>
+      </div>
+    </a>
+    <nav>
+      <a href="../index.html"><i class="fas fa-home"></i> <span>Home</span></a>
+      <a href="athlete.html"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a>
+      <a href="message.html"><i class="fas fa-envelope"></i> <span>Messages</span> <span class="notification-badge">3</span></a>
+      <a href="athelte-profile.html" class="profile-btn"><i class="fas fa-user"></i></a>
+    </nav>
+  </header>
+
+  <main class="coaches-container">
+    <h2 class="coaches-heading"><i class="fas fa-search"></i> Find Your Perfect Coach</h2>
+    
+    <div class="search-container">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" placeholder="Search by sport, name or location..." class="search-input">
+    </div>
+    
+    <div class="filters">
+      <div class="filter-btn active">All Sports</div>
+      <div class="filter-btn">Tennis</div>
+      <div class="filter-btn">Football</div>
+      <div class="filter-btn">Basketball</div>
+      <div class="filter-btn">Swimming</div>
+      <div class="filter-btn">4.5+ Rating</div>
+      <div class="filter-btn">Available Today</div>
+    </div>
+
+    <div class="coaches-grid">
+      <div class="coach-card">
+        <div class="coach-image" style="background-image: url('https://images.unsplash.com/photo-1547347298-4074fc3086f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"></div>
+        <div class="coach-info">
+          <h3>Coach Sarah Williams</h3>
+          <div class="coach-specialty">
+            <i class="fas fa-medal"></i>
+            <span>Professional Tennis Coach</span>
+          </div>
+          <div class="coach-rating">
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <span class="review-count">4.8 (128 reviews)</span>
+          </div>
+          <p class="coach-bio">Former professional tennis player with 5+ years coaching experience. Specializes in technique refinement and competitive strategy.</p>
+          <div class="coach-actions">
+            <a href="athelte-profile.html" class="btn"><i class="fas fa-user"></i> View Profile</a>
+            <a href="booking.html" class="btn secondary"><i class="fas fa-calendar-check"></i> Book Session</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="coach-card">
+        <div class="coach-image" style="background-image: url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"></div>
+        <div class="coach-info">
+          <h3>Coach David Chen</h3>
+          <div class="coach-specialty">
+            <i class="fas fa-medal"></i>
+            <span>Elite Football Coach</span>
+          </div>
+          <div class="coach-rating">
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <span class="review-count">5.0 (94 reviews)</span>
+          </div>
+          <p class="coach-bio">NFL certified coach with 7 years experience developing athletes at all levels. Focuses on speed, agility, and game intelligence.</p>
+          <div class="coach-actions">
+            <a href="athelte-profile.html" class="btn"><i class="fas fa-user"></i> View Profile</a>
+            <a href="booking.html" class="btn secondary"><i class="fas fa-calendar-check"></i> Book Session</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="coach-card">
+        <div class="coach-image" style="background-image: url('https://images.unsplash.com/photo-1519861531473-9200262188bf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80')"></div>
+        <div class="coach-info">
+          <h3>Coach Jessica Lee</h3>
+          <div class="coach-specialty">
+            <i class="fas fa-medal"></i>
+            <span>Olympic Swimming Coach</span>
+          </div>
+          <div class="coach-rating">
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="far fa-star"></i>
+            </div>
+            <span class="review-count">4.2 (76 reviews)</span>
+          </div>
+          <p class="coach-bio">Former Olympic swimmer with 10+ years coaching experience. Specializes in stroke technique and endurance training.</p>
+          <div class="coach-actions">
+            <a href="athelte-profile.html" class="btn"><i class="fas fa-user"></i> View Profile</a>
+            <a href="booking.html" class="btn secondary"><i class="fas fa-calendar-check"></i> Book Session</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo">
+        <i class="fas fa-running"></i> Sport Sphere
+      </div>
+      <div class="copyright">
+        &copy; 2025 Sport Sphere. All rights reserved.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

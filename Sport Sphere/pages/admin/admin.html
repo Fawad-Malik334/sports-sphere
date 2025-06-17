@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard | Sport Sphere</title>
+  <link rel="stylesheet" href="../../css/admin.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <header>
+    <a href="../index.html" class="logo">
+      <img src="../../assests/images/Logo.png" alt="Sport Sphere Logo" class="logo-img">
+      <div>
+        <div class="logo-text">Sports Sphere</div>
+      </div>
+    </a>
+    <nav>
+      <a href="../index.html"><i class="fas fa-home"></i> <span>Home</span></a>
+      <a href="admin.html" class="active"><i class="fas fa-user-shield"></i> <span>Admin</span> <span class="admin-badge">ADMIN</span></a>
+      <a href="report.html"><i class="fas fa-flag"></i> <span>Reports</span> <span class="notification-badge">5</span></a>
+ 
+    </nav>
+  </header>
+
+  <main class="admin-container">
+    <h2 class="admin-heading"><i class="fas fa-user-shield"></i> Admin Dashboard</h2>
+
+    <div class="admin-grid">
+      <div class="admin-card">
+        <i class="fas fa-users"></i>
+        <h3>User Management</h3>
+        <p>Manage all athletes, coaches, and vendors with full administrative controls.</p>
+        <a href="admin-user-management.html" class="btn">Manage Users</a>
+      </div>
+
+    
+
+      <div class="admin-card">
+        <i class="fas fa-money-bill-wave"></i>
+        <h3>Payment Management</h3>
+        <p>View transactions, process refunds, and manage subscription plans.</p>
+        <a href="admin-payment.html" class="btn">Payment Center</a>
+      </div>
+
+      <div class="admin-card">
+        <i class="fas fa-flag"></i>
+        <h3>Reports</h3>
+        <p>Create and manage platform-wide Reports.</p>
+        <a href="report.html" class="btn">View Reports</a>
+      </div>
+    </div>
+
+    <div class="stats-overview">
+      <div class="stat-card">
+        <div class="value">1,248</div>
+        <div class="label">Active Users</div>
+      </div>
+      <div class="stat-card">
+        <div class="value">87</div>
+        <div class="label">Pending Approvals</div>
+      </div>
+      <div class="stat-card">
+        <div class="value">23</div>
+        <div class="label">Open Reports</div>
+      </div>
+      <div class="stat-card">
+        <div class="value">$12,847</div>
+        <div class="label">Revenue (30d)</div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo">
+        <i class="fas fa-running"></i> Sport Sphere
+      </div>
+      <div class="copyright">
+        &copy; 2025 Sport Sphere. Admin Panel v2.4.1
+      </div>
+    </div>
+  </footer>
+  <script src="../js/admin.js"></script>
+</body>
+</html>

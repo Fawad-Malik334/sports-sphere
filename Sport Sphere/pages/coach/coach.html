@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Athlete Dashboard | Sport Sphere</title>
+  <link rel="stylesheet" href="../../css/coach.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+   <header>
+    <a href="../index.html" class="logo">
+      <img src="../../assests/images/Logo.png" alt="Sport Sphere Logo" class="logo-img">
+      <div>
+        <div class="logo-text">Sports Sphere</div>
+      </div>
+    </a>
+    <nav>
+      <a href="coach.html" class="active"><i class="fas fa-home"></i> <span>Home</span></a>
+      <a href="marketplace.html"><i class="fas fa-home"></i> <span>Marketplace</span></a>
+      <a href="message.html"><i class="fas fa-envelope"></i> <span>Messages</span> <span class="notification-badge">3</span></a>
+      <a href="progress.html"><i class="fas fa-chart-line"></i> <span>Coach Progress</span></a>
+      <a href="coach-profile.html" class="profile-btn"><i class="fas fa-user-tie"></i></a>
+    </nav>
+  </header>
+
+  <main class="dashboard">
+    <h2><i class="fas fa-chalkboard-teacher"></i> Welcome, Coach Williams!</h2>
+
+    <section class="feature-section">
+      <div class="card">
+        <h3><i class="fas fa-chart-bar"></i> Progress Reports</h3>
+        <p>Monitor athlete performance with detailed analytics and easily track their training journey.</p>
+        <a href="progress.html" class="btn secondary">
+          <i class="fas fa-file-alt"></i> View Progress
+        </a>
+      </div>
+    
+      <div class="card">
+        <h3><i class="fas fa-comments"></i> Athlete Communication</h3>
+        <p>Stay connected through instant messaging, share training plans, and provide session feedback in real time.</p>
+        <a href="message.html" class="btn primary">
+          <i class="fas fa-inbox"></i> Go to Messages
+        </a>
+      </div>
+    </section>    
+
+    <section class="sessions-section">
+      <h3><i class="fas fa-clock"></i> Upcoming Sessions (Next 7 Days)</h3>
+      <div class="sessions-list">
+        <div class="session-item">
+          <div class="date">Mon, Jun 5</div>
+          <div class="athlete"><i class="fas fa-user"></i> Alex Morgan</div>
+          <div class="time">3:00 PM - 4:30 PM</div>
+          <div class="action-btn"><a href="#" class="btn small-btn">Details</a></div>
+        </div>
+        <div class="session-item">
+          <div class="date">Tue, Jun 6</div>
+          <div class="athlete"><i class="fas fa-user"></i> Jamie Johnson</div>
+          <div class="time">10:00 AM - 11:30 AM</div>
+          <div class="action-btn"><a href="#" class="btn small-btn">Details</a></div>
+        </div>
+        <div class="session-item">
+          <div class="date">Wed, Jun 7</div>
+          <div class="athlete"><i class="fas fa-user"></i> Taylor Smith</div>
+          <div class="time">5:00 PM - 6:30 PM</div>
+          <div class="action-btn"><a href="#" class="btn small-btn">Details</a></div>
+        </div>
+        <div class="session-item">
+          <div class="date">Fri, Jun 9</div>
+          <div class="athlete"><i class="fas fa-user"></i> Jordan Lee</div>
+          <div class="time">4:00 PM - 5:30 PM</div>
+          <div class="action-btn"><a href="#" class="btn small-btn">Details</a></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="stats-overview">
+      <div class="stat-card">
+        <div class="value">12</div>
+        <div class="label">Upcoming Sessions</div>
+      </div>
+      <div class="stat-card">
+        <div class="value">4.9</div>
+        <div class="label">Average Rating</div>
+      </div>
+      <div class="stat-card">
+        <div class="value">87%</div>
+        <div class="label">Athlete Retention</div>
+      </div>
+      <div class="stat-card">
+        <div class="value">5</div>
+        <div class="label">New Athletes</div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo">
+        <i class="fas fa-running"></i> Sport Sphere
+      </div>
+      <div class="copyright">
+        &copy; 2025 Sport Sphere. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../js/coach.js"></script>
+</body>
+</html>

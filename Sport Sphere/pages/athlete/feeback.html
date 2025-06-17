@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback | Sport Sphere</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      color: #333;
+      line-height: 1.6;
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                  url('https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+      min-height: 100vh;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header styles - matching previous pages */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      background-color: rgba(255, 255, 255, 0.95);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-img {
+      height: 40px;
+      width: auto;
+    }
+
+    .logo-text {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #2c3e50;
+      font-style: italic;
+    }
+
+    .logo-tagline {
+      font-size: 0.8rem;
+      color: #7f8c8d;
+      margin-top: 3px;
+    }
+
+    nav {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    nav a {
+      font-weight: 600;
+      color: #2c3e50;
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    nav a:hover, nav a.active {
+      color: #e74c3c;
+    }
+
+    /* Feedback container */
+    .feedback-container {
+      max-width: 800px;
+      margin: 140px auto 60px;
+      padding: 0 5%;
+    }
+    
+    .feedback-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .feedback-header h2 {
+      font-size: 2.2rem;
+      color: white;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+    
+    .feedback-header p {
+      color: #ddd;
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    /* Feedback card */
+    .feedback-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      margin-bottom: 40px;
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+    
+    .form-group textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+    
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #e74c3c;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
+    }
+    
+    /* Rating stars */
+    .rating-container {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 0.5rem;
+    }
+    
+    .rating-star {
+      font-size: 2rem;
+      color: #ddd;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .rating-star:hover,
+    .rating-star.active {
+      color: #e74c3c;
+    }
+    
+    .rating-labels {
+      display: flex;
+      justify-content: space-between;
+      color: #7f8c8d;
+      font-size: 0.9rem;
+    }
+    
+    /* Submit button */
+    .submit-btn {
+      width: 100%;
+      padding: 1rem;
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    .submit-btn:hover {
+      background-color: #c0392b;
+      transform: translateY(-2px);
+    }
+    
+    /* Testimonials */
+    .testimonials {
+      margin-top: 3rem;
+    }
+    
+    .testimonials h3 {
+      font-size: 1.8rem;
+      color: white;
+      margin-bottom: 2rem;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+    
+    .testimonial-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 1.5rem;
+      border-left: 4px solid #e74c3c;
+    }
+    
+    .testimonial-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      color: #7f8c8d;
+    }
+    
+    .testimonial-meta strong {
+      color: #2c3e50;
+    }
+    
+    .testimonial-rating {
+      color: #e74c3c;
+    }
+    
+    .testimonial-content {
+      line-height: 1.6;
+      color: #2c3e50;
+    }
+    
+    /* Footer styles */
+    footer {
+      background-color: rgba(44, 62, 80, 0.9);
+      color: white;
+      padding: 2rem 5%;
+      margin-top: 3rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .copyright {
+      font-size: 0.9rem;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem 5%;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .feedback-container {
+        margin-top: 120px;
+      }
+      
+      .feedback-header h2 {
+        font-size: 1.8rem;
+      }
+      
+      .feedback-card {
+        padding: 1.5rem;
+      }
+      
+      .rating-star {
+        font-size: 1.8rem;
+      }
+      
+      .footer-content {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .logo-text {
+        font-size: 1.5rem;
+      }
+      
+      .feedback-header h2 {
+        font-size: 1.5rem;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      
+      .testimonials h3 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="../index.html" class="logo">
+      <img src="../../assests/images/Logo.png" alt="Sport Sphere Logo" class="logo-img">
+      <div>
+        <div class="logo-text">Sports Sphere</div>
+        <div class="logo-tagline">Your All-in-One Sports Hub</div>
+      </div>
+    </a>
+    <nav>
+      <a href="../index.html"><i class="fas fa-home"></i> <span>Home</span></a>
+      <a href="../athlete/athlete.html"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a>
+      <a href="progress.html"><i class="fas fa-chart-line"></i> <span>Progress</span></a>
+    </nav>
+  </header>
+
+  <main class="feedback-container">
+    <div class="feedback-header">
+      <h2><i class="fas fa-comment-alt"></i> Share Your Feedback</h2>
+      <p>Your opinion helps us improve our platform and services for all athletes and coaches.</p>
+    </div>
+    
+    <div class="feedback-card">
+      <form id="feedbackForm">
+        <div class="form-group">
+          <label for="feedbackType">Feedback Type</label>
+          <select id="feedbackType" required>
+            <option value="" disabled selected>Select feedback type</option>
+            <option value="coach">Coach Feedback</option>
+            <option value="platform">Platform Feedback</option>
+            <option value="feature">Feature Request</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        
+        <div class="form-group" id="coachSelectGroup" style="display: none;">
+          <label for="coachSelect">Select Coach</label>
+          <select id="coachSelect">
+            <option value="" selected disabled>Choose a coach</option>
+            <option value="sarah">Coach Sarah Williams</option>
+            <option value="mike">Coach Michael Johnson</option>
+            <option value="jessica">Coach Jessica Lee</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label>Rating</label>
+          <div class="rating-container" id="ratingStars">
+            <i class="fas fa-star rating-star" data-value="1"></i>
+            <i class="fas fa-star rating-star" data-value="2"></i>
+            <i class="fas fa-star rating-star" data-value="3"></i>
+            <i class="fas fa-star rating-star" data-value="4"></i>
+            <i class="fas fa-star rating-star" data-value="5"></i>
+          </div>
+          <div class="rating-labels">
+            <span>Poor</span>
+            <span>Excellent</span>
+          </div>
+          <input type="hidden" id="ratingValue" name="rating" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="feedbackText">Your Feedback</label>
+          <textarea id="feedbackText" placeholder="Please share your experience, suggestions, or any issues you encountered..." required></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="userEmail">Email (Optional)</label>
+          <input type="email" id="userEmail" placeholder="Your email if you'd like a response">
+        </div>
+        
+        <button type="submit" class="submit-btn">
+          <i class="fas fa-paper-plane"></i> Submit Feedback
+        </button>
+      </form>
+    </div>
+    
+    <div class="testimonials">
+      <h3><i class="fas fa-quote-left"></i> What Others Are Saying</h3>
+      
+      <div class="testimonial-card">
+        <div class="testimonial-meta">
+          <span><strong>Alex M.</strong> - Competitive Runner</span>
+          <span class="testimonial-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </span>
+        </div>
+        <div class="testimonial-content">
+          <p>"The coaching platform completely transformed my training. My coach was able to identify areas for improvement I never noticed, and my 5K time dropped by 2 minutes in just 3 months!"</p>
+        </div>
+      </div>
+      
+      <div class="testimonial-card">
+        <div class="testimonial-meta">
+          <span><strong>Jamie T.</strong> - Tennis Player</span>
+          <span class="testimonial-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </span>
+        </div>
+        <div class="testimonial-content">
+          <p>"I love how easy it is to track progress and communicate with my coach. The video analysis tools helped me correct my serve technique and add 15mph to my serve speed."</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo">
+        <i class="fas fa-running"></i> Sport Sphere
+      </div>
+      <div class="copyright">
+        &copy; 2025 Sport Sphere. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Show/hide coach select based on feedback type
+    document.getElementById('feedbackType').addEventListener('change', function() {
+      const coachSelectGroup = document.getElementById('coachSelectGroup');
+      coachSelectGroup.style.display = this.value === 'coach' ? 'block' : 'none';
+    });
+    
+    // Star rating functionality
+    const stars = document.querySelectorAll('.rating-star');
+    const ratingValue = document.getElementById('ratingValue');
+    
+    stars.forEach(star => {
+      star.addEventListener('click', function() {
+        const value = this.getAttribute('data-value');
+        ratingValue.value = value;
+        
+        stars.forEach((s, index) => {
+          if (index < value) {
+            s.classList.add('active');
+          } else {
+            s.classList.remove('active');
+          }
+        });
+      });
+    });
+    
+    // Form submission
+    document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // Here you would typically send the form data to your server
+      alert('Thank you for your feedback! We appreciate your input.');
+      this.reset();
+      stars.forEach(star => star.classList.remove('active'));
+      ratingValue.value = '';
+      document.getElementById('coachSelectGroup').style.display = 'none';
+    });
+  </script>
+</body>
+</html>
